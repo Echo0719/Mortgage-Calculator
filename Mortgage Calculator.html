@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333; /* Dark text color */
+            background-color: #9BE5E4; /* Main color theme */
+            margin: 0;
+            padding: 0;
+        }
+
+        .banner {
+            background: url('Banner.png') no-repeat center center;
+            background-size: cover;
+            width: 800px; /* Set the width to 800 pixels */
+            height: 200px; /* Set the height to 200 pixels */
+            margin: 0 auto; /* Center the banner horizontally */
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333; /* Dark header text color */
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333; /* Dark label text color */
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333; /* Dark button background color */
+            color: white; /* White button text */
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #001f3f; /* Darker shade on hover */
+        }
+
+        h2 {
+            color: #333; /* Dark result text color */
+        }
+
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Banner with the local image -->
+    <div class="banner"></div>
+
+    <h1>Mortgage Calculator</h1>
+
+    <label for="loanAmount">Loan Amount ($):</label>
+    <input type="number" id="loanAmount" placeholder="Enter loan amount" />
+
+    <label for="annualInterestRate">Annual Interest Rate (%):</label>
+    <input type="number" id="annualInterestRate" placeholder="Enter annual interest rate" />
+
+    <label for="loanTerm">Loan Term (years):</label>
+    <input type="number" id="loanTerm" placeholder="Enter loan term in years" />
+
+    <button onclick="calculateMortgage()">Calculate</button>
+
+    <h2>Monthly Mortgage Payment: $<span id="result"></span></h2>
+
+    <script>
+        function calculateMortgage() {
+            var principal = parseFloat(document.getElementById('loanAmount').value);
+            var annualInterestRate = parseFloat(document.getElementById('annualInterestRate').value);
+            var years = parseInt(document.getElementById('loanTerm').value);
+
+            var monthlyInterestRate = annualInterestRate / 100 / 12;
+            var totalPayments = years * 12;
+
+            // Calculate monthly mortgage payment
+            var monthlyPayment = (principal * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
+
+            document.getElementById('result').innerText = monthlyPayment.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
